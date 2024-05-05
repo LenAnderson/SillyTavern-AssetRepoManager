@@ -45,13 +45,17 @@ const initSettings = ()=>{
 };
 const init = ()=>{
     initSettings();
-    const connect = document.querySelector('#assets-connect-button');
-    const originalInput = document.querySelector('#assets-json-url-field');
+    const connect = /**@type {HTMLElement}*/(document.querySelector('#assets-connect-button'));
+    const lbl = /**@type {HTMLLabelElement}*/(document.querySelector('label[for="assets-json-url-field"]'));
+    lbl.textContent = 'Assets Repository';
+    lbl.htmlFor = 'assets-json-url-select';
+    const originalInput = /**@type {HTMLInputElement}*/(document.querySelector('#assets-json-url-field'));
     originalRepo = new Repository(
         'SillyTavern - Content (official assets)',
         originalInput.value,
     );
     const sel = document.createElement('select'); {
+        sel.id = 'assets-json-url-select';
         sel.classList.add('text_pole');
         sel.addEventListener('change', ()=>{
             settings.url = sel.value;
