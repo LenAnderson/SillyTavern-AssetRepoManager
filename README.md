@@ -2,4 +2,4 @@
 
 Manage additional asset repositories.
 
-![](README/arm-01.png)
+![](README/arm-02.png)
