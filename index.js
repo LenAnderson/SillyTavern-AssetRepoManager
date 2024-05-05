@@ -45,6 +45,7 @@ const initSettings = ()=>{
 };
 const init = ()=>{
     initSettings();
+    const connect = document.querySelector('#assets-connect-button');
     const originalInput = document.querySelector('#assets-json-url-field');
     originalRepo = new Repository(
         'SillyTavern - Content (official assets)',
@@ -57,6 +58,7 @@ const init = ()=>{
             originalInput.value = sel.value;
             originalInput.dispatchEvent(new Event('change', { bubbles:true }));
             originalInput.dispatchEvent(new Event('input', { bubbles:true }));
+            connect.click();
             saveSettingsDebounced();
         });
         for (const repo of [originalRepo, ...settings.repositoryList.toSorted((a,b)=>a.title.toLowerCase().localeCompare(b.title.toLowerCase()))]) {
