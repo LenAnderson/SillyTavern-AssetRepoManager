@@ -1,0 +1,8 @@
+.assets-connect-div {
+	gap: 0.5em;
+	align-items: center;
+}
+
+#assets-json-url-field {
+	display: none;
+}
