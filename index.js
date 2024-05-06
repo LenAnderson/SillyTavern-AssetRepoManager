@@ -76,6 +76,7 @@ const init = ()=>{
         originalInput.insertAdjacentElement('beforebegin', sel);
     }
     sel.value = settings.repository.url ?? originalRepo.url;
+    sel.dispatchEvent(new Event('change'));
 
     const addBtn = document.createElement('div'); {
         addBtn.classList.add('menu_button');
