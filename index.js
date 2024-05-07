@@ -120,9 +120,55 @@ const init = ()=>{
                 originalInput.value = repo.url;
                 settings.url = repo.url;
                 saveSettingsDebounced();
+                sel.dispatchEvent(new Event('change'));
             }
         });
         sel.parentElement.append(addBtn);
+    }
+
+    const editBtn = document.createElement('div'); {
+        editBtn.classList.add('menu_button');
+        editBtn.classList.add('fa-solid');
+        editBtn.classList.add('fa-xl');
+        editBtn.classList.add('fa-pencil');
+        editBtn.title = 'Edit asset repository';
+        editBtn.addEventListener('click', async()=>{
+            if (settings.repository == originalRepo) {
+                toastr.warning('Cannot edit default repository');
+                return;
+            }
+            const dom = document.createElement('div');
+            const h3 = document.createElement('h3'); {
+                h3.textContent = 'Edit Asset Repository';
+                dom.append(h3);
+            }
+            const title = document.createElement('input'); {
+                title.classList.add('text_pole');
+                title.placeholder = 'Title';
+                title.value = settings.repository.title;
+                dom.append(title);
+            }
+            const url = document.createElement('input'); {
+                url.classList.add('text_pole');
+                url.placeholder = 'Repository URL';
+                url.value = settings.repository.url;
+                dom.append(url);
+            }
+            const dlg = new Popup(dom, POPUP_TYPE.CONFIRM, null, { okButton: 'Save', cancelButton: 'Cancel' });
+            await dlg.show();
+            if (dlg.result == POPUP_RESULT.AFFIRMATIVE) {
+                const repo = settings.repository;
+                repo.title = title.value;
+                repo.url = url.value;
+                repo.option.value = repo.url;
+                repo.option.textContent = repo.title;
+                originalInput.value = repo.url;
+                settings.url = repo.url;
+                saveSettingsDebounced();
+                sel.dispatchEvent(new Event('change'));
+            }
+        });
+        sel.parentElement.append(editBtn);
     }
 
     const delBtn = document.createElement('div'); {
